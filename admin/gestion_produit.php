@@ -6,6 +6,7 @@
     header('location:../connexion.php'); //redirection vers la page de conenxion
     exit();
   }
+
 //AFFICHAGE produit --------------------------------------------
 $r = execute_requete("SELECT id_produit, date_arrivee, date_depart, salle.id_salle, salle.titre, salle.photo,prix, etat FROM produit, salle WHERE salle.id_salle = produit.id_salle");
 // $produits = $r->fetch(PDO::FETCH_ASSOC);
@@ -43,10 +44,10 @@ $content .= '<table class="table table-dark">';
                         <p><a href="'.URL.'">
                           <i class="fas fa-search"></i>
                         </a></p>
-                        <p><a href="?action=edit&id_salle='. $ligne['id_salle'] .'">
+                        <p><a href="?action=edit&id_produit='. $ligne['id_produit'] .'">
                           <i class="far fa-edit"></i>
                         </a></p>
-                        <p><a href="?action=delete&id_salle='. $ligne['id_salle'] .'" onclick="return( confirm(\'Es tu certain ?\') )" >
+                        <p><a href="?action=delete&id_produit='. $ligne['id_produit'] .'" onclick="return( confirm(\'Es tu certain ?\') )" >
                         <i class="far fa-trash-alt"></i>
                         </a></p>
                       </td>';
@@ -62,7 +63,11 @@ $content .= '</div>';
 
 //INSERTION produit --------------------------------------------
   if (!empty( $_POST )) {
-    debug($_POST);
+    // debug($_POST);
+    foreach ($_POST as $key => $value) { //ici, on passe toutes les informations postées du formulaire dans les fonctions htmlentities() et addslashes() :
+
+    $_POST[$key] = htmlentities( addslashes( $value ) );
+    }
     execute_requete("INSERT INTO produit(id_salle, date_arrivee, date_depart, prix) VALUES(
         '$_POST[salle_select]',
         '$_POST[date_arrivee]',
@@ -73,6 +78,16 @@ $content .= '</div>';
       exit();
   }
 //INSERTION produit --------------------------------------------
+
+//SUPPRESION produit --------------------------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+  debug($_GET);
+  execute_requete('DELETE FROM produit WHERE id_produit ='. $_GET['id_produit'] . ' ');
+  header('location:gestion_produit.php');
+    exit();
+
+}
+//SUPPRESION produit --------------------------------------------
 ?>
 <div class="container">
   <h1>Gestion des produits</h1>
