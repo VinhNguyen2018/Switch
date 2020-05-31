@@ -7,8 +7,56 @@
     exit();
   }
 //AFFICHAGE produit --------------------------------------------
-$r = execute_requete("SELECT * FROM produit");
-$produit = $r->fetch(PDO::FETCH_ASSOC);
+$r = execute_requete("SELECT id_produit, date_arrivee, date_depart, salle.id_salle, salle.titre, salle.photo,prix, etat FROM produit, salle WHERE salle.id_salle = produit.id_salle");
+// $produits = $r->fetch(PDO::FETCH_ASSOC);
+// debug($produits);
+$content .= '<div class="table-responsive">';
+$content .= '<table class="table table-dark">';
+  $content .= '<thead>';
+    $content .= '<tr>';
+      for ($i=0; $i < $r->columnCount() ; $i++) {
+        $colonne = $r->getColumnMeta( $i );
+        if ($colonne['name'] == 'photo') {
+
+        }
+        else{
+          $content .= '<th scope="col">' . $colonne['name'] . '</th>';
+
+        }
+      }
+    $content .= '<th scope="col">Action</th>';
+      while ($ligne = $r->fetch(PDO::FETCH_ASSOC) ) {
+        $content .= '<tr>';
+        // debug($ligne);
+          foreach ($ligne as $key => $value) {
+            if ($key == 'photo') {
+            }
+            elseif ($key == 'id_salle'){
+              $content .= "<td><p>$ligne[id_salle] - Salle $ligne[titre]</p><img src='$ligne[photo]' alt='photo de la salle' style='width:100px;'></td>";
+
+            }
+            else{
+              $content .= "<td>$value</td>";
+            }
+          }
+          $content .= '<td>
+                        <p><a href="'.URL.'">
+                          <i class="fas fa-search"></i>
+                        </a></p>
+                        <p><a href="?action=edit&id_salle='. $ligne['id_salle'] .'">
+                          <i class="far fa-edit"></i>
+                        </a></p>
+                        <p><a href="?action=delete&id_salle='. $ligne['id_salle'] .'" onclick="return( confirm(\'Es tu certain ?\') )" >
+                        <i class="far fa-trash-alt"></i>
+                        </a></p>
+                      </td>';
+
+        $content .= '</tr>';
+      }
+    $content .= '</tr>';
+  $content .= '</thead>';
+$content .= '</table>';
+$content .= '</div>';
 
 //AFFICHAGE produit --------------------------------------------
 
@@ -28,6 +76,7 @@ $produit = $r->fetch(PDO::FETCH_ASSOC);
 ?>
 <div class="container">
   <h1>Gestion des produits</h1>
+  <?= $content  ?>
   <form method="post">
     <div class="row">
       <div class="col-lg-6">
