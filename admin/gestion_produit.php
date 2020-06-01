@@ -68,6 +68,14 @@ $content .= '</div>';
 
     $_POST[$key] = htmlentities( addslashes( $value ) );
     }
+//Modification produit --------------------------------------------
+  if (isset($_GET['action']) && $_GET['action'] == 'edit') {
+    debug($_GET);
+
+    header('location:gestion_produit.php');
+      exit();
+  }
+  else{
     execute_requete("INSERT INTO produit(id_salle, date_arrivee, date_depart, prix) VALUES(
         '$_POST[salle_select]',
         '$_POST[date_arrivee]',
@@ -76,12 +84,27 @@ $content .= '</div>';
       ) ");
     header('location:gestion_produit.php');
       exit();
+    }
   }
-//INSERTION produit --------------------------------------------
+
+if( isset( $_GET['id_produit'] ) ){
+  //je récupère les infos de l'article à modifier :
+  $r = execute_requete(" SELECT * FROM produit WHERE id_produit = '$_GET[id_produit]' ");
+
+  $produit_actuel = $r->fetch(PDO::FETCH_ASSOC);
+  // debug($produit_actuel);
+  }
+  $date_arrivee = ( isset($produit_actuel['date_arrivee']) ) ? $produit_actuel['date_arrivee'] : '';
+  $date_depart = ( isset($produit_actuel['date_depart']) ) ? $produit_actuel['date_depart'] : '';
+  $tarif = ( isset($produit_actuel['prix']) ) ? $produit_actuel['prix'] : '';
+  // print_r(gettype($prix));
+  // $salle = ( isset($produit_actuel['id_salle']) ) ? $produit_actuel['prix'] : '';
+
+
 
 //SUPPRESION produit --------------------------------------------
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-  debug($_GET);
+  // debug($_GET);
   execute_requete('DELETE FROM produit WHERE id_produit ='. $_GET['id_produit'] . ' ');
   header('location:gestion_produit.php');
     exit();
@@ -97,11 +120,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
       <div class="col-lg-6">
         <div class="form-group">
           <label for="date_arrivee">Date d'arrivée</label>
-          <input type="date" class="form-control" name="date_arrivee" id="date_arrivee">
+          <input type="datetime-local" class="form-control" name="date_arrivee" id="date_arrivee" value="$date-arrivee">
         </div>
         <div class="form-group">
           <label for="date_depart">Date de départ</label>
-          <input type="date" class="form-control" name="date_depart" id="date_depart">
+          <input type="datetime-local" class="form-control" name="date_depart" id="date_depart" value="$date_depart">
         </div>
       </div>
       <div class="col-lg-6">
@@ -134,7 +157,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
         </div>
         <div class="form-group">
           <label for="tarif">Tarif</label>
-          <input type="number" placeholder="prix en euros" name="tarif" id="tarif" class="form-control">
+          <input type="number" placeholder="prix en euros" name="tarif" id="tarif" class="form-control" value="<?= $tarif ?>">
         </div>
         <input type="submit" class="btn-primary" value="enregistrer">
       </div>

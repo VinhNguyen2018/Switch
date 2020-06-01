@@ -185,11 +185,11 @@ if( isset( $_GET['id_salle'] ) ){
       <div class="col-lg-6">
         <div class="form-group">
           <label for="titre">Titre</label>
-          <input type="text" class="form-control" name="titre" id="titre">
+          <input type="text" class="form-control" name="titre" id="titre" value="<?= $titre ?>">
         </div>
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+          <textarea class="form-control" name="description" id="description" rows="3"><?= $description ?></textarea>
         </div>
         <div class="form-group">
           <label for="photo">Photo</label>
@@ -203,33 +203,33 @@ if( isset( $_GET['id_salle'] ) ){
           ?>
         <div class="form-group">
           <label for="capacite">Capacité</label>
-          <input type="number" class="form-control" name="capacite" id="capacite">
+          <input type="number" class="form-control" name="capacite" id="capacite" value="<?= $capacite ?>">
         </div>
         <div class="form-group">
           <label for="categorie">Catégorie</label>
           <select class="form-control" name="categorie" id="categorie" name="categorie">
-            <option value="reunion">Réunion</option>
-            <option value="bureau">Bureau</option>
-            <option value="formation">Formation</option>
+            <option value="reunion" <?= $categorie_r ?> >Réunion</option>
+            <option value="bureau"<?= $categorie_b ?> >Bureau</option>
+            <option value="formation"<?= $categorie_f ?> >Formation</option>
           </select>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="form-group">
           <label for="pays">Pays</label>
-          <input type="text" class="form-control" name="pays" id="pays">
+          <input type="text" class="form-control" name="pays" id="pays" value="<?= $pays ?>">
         </div>
         <div class="form-group">
           <label for="ville">Ville</label>
-          <input type="text" class="form-control" name="ville" id="ville">
+          <input type="text" class="form-control" name="ville" id="ville" value="<?= $ville ?>">
         </div>
         <div class="form-group">
           <label for="adresse">Adresse</label>
-          <textarea class="form-control" name="adresse" id="adresse" rows="2"></textarea>
+          <textarea class="form-control" name="adresse" id="adresse" rows="2"><?= $adresse ?></textarea>
         </div>
         <div class="form-group">
           <label for="cp">Code Postal</label>
-          <input id="cp" name="cp" type="text" pattern="[0-9]*" class="form-control">
+          <input id="cp" name="cp" type="text" pattern="[0-9]*" class="form-control" value="<?= $cp ?>">
         </div>
         <input type="submit" class="btn btn-primary" name="validation" value="Enregistrer"></input>
 
