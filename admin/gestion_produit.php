@@ -60,7 +60,7 @@ $content .= '</table>';
 $content .= '</div>';
 
 //AFFICHAGE produit --------------------------------------------
-
+// debug($_GET);
 //INSERTION produit --------------------------------------------
   if (!empty( $_POST )) {
     // debug($_POST);
@@ -70,17 +70,23 @@ $content .= '</div>';
     }
 //Modification produit --------------------------------------------
   if (isset($_GET['action']) && $_GET['action'] == 'edit') {
-    debug($_GET);
+    // debug(gettype(intval($_GET[id_produit])));
+    execute_requete("UPDATE produit SET
+    date_arrivee = '$_POST[date_arrivee]',
+    date_depart = '$_POST[date_depart]',
+    id_salle = '$_POST[salle_select]',
+    prix = '$_POST[prix]'
+    WHERE id_produit = '$_GET[id_produit]'");
 
-    header('location:gestion_produit.php');
-      exit();
+    // header('location:gestion_produit.php');
+    //   exit();
   }
   else{
     execute_requete("INSERT INTO produit(id_salle, date_arrivee, date_depart, prix) VALUES(
         '$_POST[salle_select]',
         '$_POST[date_arrivee]',
         '$_POST[date_depart]',
-        '$_POST[tarif]'
+        '$_POST[prix]'
       ) ");
     header('location:gestion_produit.php');
       exit();
@@ -94,7 +100,7 @@ if( isset( $_GET['id_produit'] ) ){
   $produit_actuel = $r->fetch(PDO::FETCH_ASSOC);
   // debug($produit_actuel);
   }
-  $tarif = ( isset($produit_actuel['prix']) ) ? $produit_actuel['prix'] : '';
+  $prix = ( isset($produit_actuel['prix']) ) ? $produit_actuel['prix'] : '';
   if ( isset($produit_actuel['date_arrivee']) ) {
     $date = strtotime($produit_actuel['date_arrivee']);
 
@@ -172,8 +178,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
           </select>
         </div>
         <div class="form-group">
-          <label for="tarif">Tarif</label>
-          <input type="number" placeholder="prix en euros" name="tarif" id="tarif" class="form-control" value="<?= $tarif ?>">
+          <label for="prix">Tarif</label>
+          <input type="number" placeholder="prix en euros" name="prix" id="prix" class="form-control" value="<?= $prix ?>">
         </div>
         <input type="submit" class="btn-primary" value="enregistrer">
       </div>
