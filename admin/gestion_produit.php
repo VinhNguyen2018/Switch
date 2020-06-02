@@ -95,7 +95,7 @@ if( isset( $_GET['id_produit'] ) ){
   // debug($produit_actuel);
   }
   $tarif = ( isset($produit_actuel['prix']) ) ? $produit_actuel['prix'] : '';
-  if ($produit_actuel['date_arrivee']) {
+  if ( isset($produit_actuel['date_arrivee']) ) {
     $date = strtotime($produit_actuel['date_arrivee']);
 
     $date_arrivee = date('Y-m-d\TH:i:s',$date);
@@ -103,7 +103,7 @@ if( isset( $_GET['id_produit'] ) ){
   else{
     $date_arrivee = '';
   }
-  if ($produit_actuel['date_depart']) {
+  if ( isset($produit_actuel['date_depart']) ) {
     $date = strtotime($produit_actuel['date_depart']);
 
     $date_depart = date('Y-m-d\TH:i:s',$date);
@@ -145,8 +145,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
             <?php
               $r = execute_requete("SELECT id_salle, titre, adresse, cp, ville, capacite, categorie FROM salle");
               while ( $salle = $r->fetch(PDO::FETCH_ASSOC) ) {
-                debug($salle);
-                echo '<option value="' . intval($salle['id_salle']) . '">';
+                // debug($salle);
+                if (isset( $_GET['id_produit']) && $produit_actuel['id_salle'] == $salle['id_salle'] ) {
+                  echo '<option value="' . intval($salle['id_salle']) . '" selected >';
+                }
+                else{
+                  echo '<option value="' . intval($salle['id_salle']) . '">';
+                }
                 foreach ($salle as $key => $value) {
                   if ($key == 'categorie' ) {
                     echo "$value";
