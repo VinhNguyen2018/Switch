@@ -54,15 +54,20 @@ $content .= '</div>';
 
 //--------------TABLEAU AFFICHAGE DES MEMBRES-------------------//
 
-//----------------- INSERTION----------------------------
-
+//-------------- SUPPRESSION----------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'delete'){
+  debug($_GET);
+execute_requete('DELETE FROM membre WHERE id_membre ='. $_GET['id_membre'] . ' ');
+  header('location:gestion_membre.php');
+    exit();
+}
+//Modification membres --------------------------------------------
 if (!empty( $_POST )) {
     // debug($_POST);
     foreach ($_POST as $key => $value) { //ici, on passe toutes les informations postées du formulaire dans les fonctions htmlentities() et addslashes() :
 
     $_POST[$key] = htmlentities( addslashes( $value ) );
     }
-//Modification membres --------------------------------------------
   if (isset($_GET['action']) && $_GET['action'] == 'edit') {
     execute_requete("UPDATE membre SET
     pseudo = '$_POST[pseudo]',
