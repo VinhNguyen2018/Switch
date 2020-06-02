@@ -94,12 +94,23 @@ if( isset( $_GET['id_produit'] ) ){
   $produit_actuel = $r->fetch(PDO::FETCH_ASSOC);
   // debug($produit_actuel);
   }
-  $date_arrivee = ( isset($produit_actuel['date_arrivee']) ) ? $produit_actuel['date_arrivee'] : '';
-  $date_depart = ( isset($produit_actuel['date_depart']) ) ? $produit_actuel['date_depart'] : '';
   $tarif = ( isset($produit_actuel['prix']) ) ? $produit_actuel['prix'] : '';
-  // print_r(gettype($prix));
-  // $salle = ( isset($produit_actuel['id_salle']) ) ? $produit_actuel['prix'] : '';
+  if ($produit_actuel['date_arrivee']) {
+    $date = strtotime($produit_actuel['date_arrivee']);
 
+    $date_arrivee = date('Y-m-d\TH:i:s',$date);
+  }
+  else{
+    $date_arrivee = '';
+  }
+  if ($produit_actuel['date_depart']) {
+    $date = strtotime($produit_actuel['date_depart']);
+
+    $date_depart = date('Y-m-d\TH:i:s',$date);
+  }
+  else{
+    $date_depart = '';
+  }
 
 
 //SUPPRESION produit --------------------------------------------
@@ -120,11 +131,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
       <div class="col-lg-6">
         <div class="form-group">
           <label for="date_arrivee">Date d'arrivée</label>
-          <input type="datetime-local" class="form-control" name="date_arrivee" id="date_arrivee" value="$date-arrivee">
+          <input type="datetime-local" class="form-control" name="date_arrivee" id="date_arrivee" value="<?= $date_arrivee ?>">
         </div>
         <div class="form-group">
           <label for="date_depart">Date de départ</label>
-          <input type="datetime-local" class="form-control" name="date_depart" id="date_depart" value="$date_depart">
+          <input type="datetime-local" class="form-control" name="date_depart" id="date_depart" value="<?= $date_depart ?>">
         </div>
       </div>
       <div class="col-lg-6">
