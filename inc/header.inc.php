@@ -48,6 +48,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?= URL ?>admin/gestion_salle.php">Gestion salle</a>
             <a class="dropdown-item" href="<?= URL ?>admin/gestion_produit.php">Gestion produit</a>
+            <a class="dropdown-item" href="<?= URL ?>admin/gestion_membre.php">Gestion membre</a>
 
           <?php else : ?>
             <a class="dropdown-item" href="<?= URL ?>inscription.php">Inscription</a>
