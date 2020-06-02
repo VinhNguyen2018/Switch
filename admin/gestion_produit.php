@@ -78,8 +78,8 @@ $content .= '</div>';
     prix = '$_POST[prix]'
     WHERE id_produit = '$_GET[id_produit]'");
 
-    // header('location:gestion_produit.php');
-    //   exit();
+    header('location:gestion_produit.php');
+      exit();
   }
   else{
     execute_requete("INSERT INTO produit(id_salle, date_arrivee, date_depart, prix) VALUES(
