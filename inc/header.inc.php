@@ -46,9 +46,14 @@
             <a class="dropdown-item" href="<?= URL ?>connexion.php?action=deconnexion">Déconnexion</a>
             <a class="dropdown-item" href="<?= URL ?>profil.php">Profil</a>
             <div class="dropdown-divider"></div>
+            <span class="dropdown-item"> <strong>Back Office</strong></span>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?= URL ?>admin/gestion_salle.php">Gestion salle</a>
             <a class="dropdown-item" href="<?= URL ?>admin/gestion_produit.php">Gestion produit</a>
             <a class="dropdown-item" href="<?= URL ?>admin/gestion_membre.php">Gestion membre</a>
+            <a class="dropdown-item" href="<?= URL ?>admin/gestion_avis.php">Gestion avis</a>
+            <a class="dropdown-item" href="<?= URL ?>admin/gestion_commande.php">Gestion commande</a>
+            <a class="dropdown-item" href="<?= URL ?>admin/statistiques.php">Statistiques</a>
 
           <?php else : ?>
             <a class="dropdown-item" href="<?= URL ?>inscription.php">Inscription</a>
