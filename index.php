@@ -51,7 +51,7 @@
 
         <div class="row">
         <?php
-        $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, description, salle.photo, salle.categorie FROM produit, salle WHERE produit.id_salle = salle.id_salle");
+        $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, description, salle.photo, salle.categorie, id_produit FROM produit, salle WHERE produit.id_salle = salle.id_salle");
         while ($produit = $r->fetch(PDO::FETCH_ASSOC)) {
           // debug($produit);
           echo '<div class="col-lg-4 col-md-6 mb-4">';
@@ -81,7 +81,7 @@
               // a changer
                 echo '<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>';
                 // a changer
-                echo '<a href="#" class="float-right"><i class="fas fa-search"></i> Voir</a>';
+                echo '<a href="' .URL.'fiche_produit.php?id_produit='. $produit['id_produit'] . '" class="float-right"><i class="fas fa-search"></i> Voir</a>';
               echo '</div>';
             echo '</div>';
           echo '</div>';
@@ -122,5 +122,4 @@
   </div>
   <!-- /.container -->
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <?php require_once "inc/footer.inc.php"; ?>
