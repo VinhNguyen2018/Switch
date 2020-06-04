@@ -13,16 +13,20 @@ else{ //Sinon, redirection vers l'accueil
 }
 
 $produit = $r->fetch(PDO::FETCH_ASSOC);
-  // debug( $produit );
-
+  // debug( $produit['id_salle'] );
+$id_salle = $produit['id_salle'];
  ?>
 
 
 <!-- Page Content -->
   <div class="container">
     <div class="top-product" style="display:flex; justify-content:space-between;">
-      <h2><?= $produit['categorie'] == 'bureau' ? 'Bureau' : 'Salle' . ' ' . $produit['titre']  ?></h2>
-      <a class="btn btn-success my-aut" href="#" role="button">Réserver</a>
+      <h2><?= $produit['categorie'] == 'bureau' ? 'Bureau ' . $produit['titre']   : 'Salle' . ' ' . $produit['titre']  ?></h2>
+      <?php if (userConnect()): ?>
+        <a class="btn btn-success my-auto" href="#" role="button">Réserver</a>
+      <?php else : ?>
+        <p style="margin:auto 0;"><a href="<?= URL . 'connexion.php' ?>" >Connectez-vous </a>pour réserver</p>
+      <?php endif ?>
     </div>
     <hr>
     <div class="row">
@@ -91,7 +95,12 @@ $produit = $r->fetch(PDO::FETCH_ASSOC);
   </div>
   <hr>
   <div class="bottom-product">
-    <a href="<?= URL . 'avis.php?id_produit=' . $_GET['id_produit']  ?>">Déposer un commentaire et une note</a>
+    <?php if (userConnect()): ?>
+      <a href="<?= URL . 'avis.php?id_salle=' . $id_salle  ?>">Déposer un commentaire et une note</a>
+    <?php else : ?>
+      <p>Pour laisser un commentaire sur le produit, <a href="<?= URL . 'connexion.php'  ?>"> connectez-vous</a></p>
+
+    <?php endif ?>
     <a href="<?= URL  ?>">Retour vers le catalogue</a>
   </div>
   <!-- /.container -->

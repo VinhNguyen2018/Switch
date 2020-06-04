@@ -80,6 +80,11 @@ a{
     box-sizing: border-box;
 }
 
+h1{
+    font-size: 3rem;
+    color: #000;
+    font-weight: 300;
+}
 h2{
     color: #000;
     margin-bottom: 1rem;
@@ -87,6 +92,31 @@ h2{
     font-size: 1.75rem;
     font-weight: 300;
 }
+
+h3{
+    color: #000;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+h4{
+    color: #000;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-size: 1.35rem;
+    font-weight: 300;
+}
+
+h5{
+    color: #000;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
 /*------------------FIN GENERAL-------------------*/
 
 
@@ -97,3 +127,9 @@ h2{
   margin:2em auto;
 }
 /*------------------FIN FICHE PRODUIT-------------------*/
+
+/*------------------AVIS-------------------*/
+.formulaire-avis{
+  width:50%;
+}
+/*------------------FIN AVIS-------------------*/
