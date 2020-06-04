@@ -4,7 +4,7 @@
 // debug($_GET);
 if( isset($_GET['id_produit']) ){ //Si il existe 'id_produit' dans mon URL c'est que j'ai bien sélectionné un produit
 
-  $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, salle.description, salle.photo, salle.categorie, salle.capacite, salle.adresse, salle.cp, salle.ville FROM produit, salle WHERE produit.id_salle = salle.id_salle");
+  $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, salle.description, salle.photo, salle.categorie, salle.capacite, salle.adresse, salle.cp, salle.ville FROM produit, salle WHERE produit.id_salle = salle.id_salle AND id_produit = '$_GET[id_produit]'");
 }
 else{ //Sinon, redirection vers l'accueil
 
@@ -22,7 +22,7 @@ $produit = $r->fetch(PDO::FETCH_ASSOC);
   <div class="container">
     <div class="top-product" style="display:flex; justify-content:space-between;">
       <h2><?= $produit['categorie'] == 'bureau' ? 'Bureau' : 'Salle' . ' ' . $produit['titre']  ?></h2>
-      <a class="btn btn-success my-auto" href="#" role="button">Réserver</a>
+      <a class="btn btn-success my-aut" href="#" role="button">Réserver</a>
     </div>
     <hr>
     <div class="row">
@@ -80,7 +80,7 @@ $produit = $r->fetch(PDO::FETCH_ASSOC);
       while ( $produit = $r->fetch(PDO::FETCH_ASSOC) ) {
         echo '<div class="col-lg-3">';
 
-            echo '<a href="' . URL . 'fiche_produit?id_produit=' . $produit['id_produit'] . '">
+            echo '<a href="' . URL . 'fiche_produit.php?id_produit=' . $produit['id_produit'] . '">
                     <img src="' . $produit['photo'] . '" alt="' . $produit['titre'] . '" class="img-thumbnail">
                   </a>';
 
@@ -92,7 +92,7 @@ $produit = $r->fetch(PDO::FETCH_ASSOC);
   <hr>
   <div class="bottom-product">
     <a href="<?= URL . 'avis.php?id_produit=' . $_GET['id_produit']  ?>">Déposer un commentaire et une note</a>
-    <a href="<?= URL  ?>">Retour vers le atalogue</a>
+    <a href="<?= URL  ?>">Retour vers le catalogue</a>
   </div>
   <!-- /.container -->
   </div>
