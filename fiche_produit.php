@@ -1,10 +1,10 @@
 <?php require_once "inc/header.inc.php"; ?>
 
 <?php
-// debug($_GET);
+// debug($_GET['action']);
 if( isset($_GET['id_produit']) ){ //Si il existe 'id_produit' dans mon URL c'est que j'ai bien sélectionné un produit
 
-  $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, salle.description, salle.photo, salle.categorie, salle.capacite, salle.adresse, salle.cp, salle.ville FROM produit, salle WHERE produit.id_salle = salle.id_salle AND id_produit = '$_GET[id_produit]'");
+  $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, salle.description, salle.photo, salle.categorie, salle.capacite, salle.adresse, salle.cp, salle.ville, etat FROM produit, salle WHERE produit.id_salle = salle.id_salle AND id_produit = '$_GET[id_produit]'");
 }
 else{ //Sinon, redirection vers l'accueil
 
@@ -13,8 +13,26 @@ else{ //Sinon, redirection vers l'accueil
 }
 
 $produit = $r->fetch(PDO::FETCH_ASSOC);
-  // debug( $produit['id_salle'] );
+  // debug( $produit );
 $id_salle = $produit['id_salle'];
+
+//RESERVATION-------------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'booking') {
+  if ($produit['etat'] == 'reservation') {
+    echo '<div class="alert alert-danger" role="alert">Le produit n\'est pas disponible.</div>';
+  }
+  else{
+    $id_membre = $_SESSION['membre']['id_membre'];
+    execute_requete("INSERT INTO commande(id_membre, id_produit, date_enregistrement) VALUES
+      ( '$id_membre',
+        '$_GET[id_produit]',
+        NOW() )  ");
+    // debug($_SESSION['membre']['id_membre']);
+    execute_requete("UPDATE produit SET etat = 'reservation' WHERE id_produit = '$_GET[id_produit]' ");
+    header('location:profil.php');
+    exit(); //quitte le script courant
+  }
+}
  ?>
 
 
@@ -26,7 +44,7 @@ $id_salle = $produit['id_salle'];
         <span class="text-warning"><?= affichage_note_etoile($id_salle); ?></span>
       </h2>
       <?php if (userConnect()): ?>
-        <a class="btn btn-success my-auto" href="#" role="button">Réserver</a>
+        <a class="btn btn-success my-auto" href="?action=booking&id_produit=<?= $_GET['id_produit'] ?>" role="button" onclick="confirm('Validez votre réservation ?')">Réserver</a>
       <?php else : ?>
         <p style="margin:auto 0;"><a href="<?= URL . 'connexion.php' ?>" >Connectez-vous </a>pour réserver</p>
       <?php endif ?>
