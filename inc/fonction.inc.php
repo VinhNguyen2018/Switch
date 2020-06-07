@@ -63,31 +63,41 @@ function calcul_note_avis($id_salle){
     $note_total += $note['note'];
     $nombre_de_notes++;
   }
-  $moyenne = $note_total/$nombre_de_notes;
+  if ($note_total == 0) {
+    $moyenne = 0;
+    return $moyenne;
+  }
+  else{
+    $moyenne = $note_total/$nombre_de_notes;
   return $moyenne;
+  }
 }
 
 // fonction affichage_note_etoile
 
 function affichage_note_etoile($id_salle){
   $moyenne = calcul_note_avis($id_salle);
-  for ($i=0;  $i < $moyenne; $i++) {
-    $resultat = $moyenne - $i;
-    if ($resultat > 1) {
-      echo '<i class="fas fa-star"></i>';
-    }
-    elseif ($resultat > 0) {
-      echo '<i class="fas fa-star-half-alt"></i>';
-    }
-
-    // $resultat>1 ? echo '&#9733;' : echo '&#9734;';
-    // echo '&#9733;';
-  }
-  $restant = 5 - $moyenne;
-  if ( $restant > 1  ) {
-    for ($i=0; $i < $restant  ; $i++) {
+  if ($moyenne == 0) {
+    for ($i=0; $i < 5 ; $i++) {
       echo '<i class="far fa-star"></i>';
-      $restant--;
+    }
+  }
+  else{
+    for ($i=0;  $i < $moyenne; $i++) {
+      $resultat = $moyenne - $i;
+      if ($resultat > 1) {
+        echo '<i class="fas fa-star"></i>';
+      }
+      elseif ($resultat > 0) {
+        echo '<i class="fas fa-star-half-alt"></i>';
+      }
+    }
+    $restant = 5 - $moyenne;
+    if ( $restant > 1  ) {
+      for ($i=0; $i < $restant  ; $i++) {
+        echo '<i class="far fa-star"></i>';
+        $restant--;
+      }
     }
   }
 }

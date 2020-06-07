@@ -78,9 +78,9 @@
                       </p>';
               echo '</div>';
               echo '<div class="card-footer">';
-              // a changer
-                echo '<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>';
-                // a changer
+                echo '<small class="text-muted">';
+                  affichage_note_etoile($produit['id_salle']);
+                echo '</small>';
                 echo '<a href="' .URL.'fiche_produit.php?id_produit='. $produit['id_produit'] . '" class="float-right"><i class="fas fa-search"></i> Voir</a>';
               echo '</div>';
             echo '</div>';

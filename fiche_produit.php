@@ -21,7 +21,10 @@ $id_salle = $produit['id_salle'];
 <!-- Page Content -->
   <div class="container">
     <div class="top-product" style="display:flex; justify-content:space-between;">
-      <h2><?= $produit['categorie'] == 'bureau' ? 'Bureau ' . $produit['titre']   : 'Salle' . ' ' . $produit['titre']  ?></h2>
+      <h2>
+        <?= $produit['categorie'] == 'bureau' ? 'Bureau ' . $produit['titre']   : 'Salle' . ' ' . $produit['titre']  ?>
+        <span class="text-warning"><?= affichage_note_etoile($id_salle); ?></span>
+      </h2>
       <?php if (userConnect()): ?>
         <a class="btn btn-success my-auto" href="#" role="button">Réserver</a>
       <?php else : ?>
