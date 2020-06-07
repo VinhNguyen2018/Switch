@@ -51,7 +51,9 @@
 
         <div class="row">
         <?php
-        $r = execute_requete("SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, description, salle.photo, salle.categorie, id_produit FROM produit, salle WHERE produit.id_salle = salle.id_salle");
+        $r = execute_requete(" SELECT date_arrivee, salle.id_salle, date_depart, prix, salle.titre, description, salle.photo, salle.categorie, id_produit FROM produit, salle WHERE produit.id_salle = salle.id_salle
+          AND produit.etat = 'libre'
+          AND date_arrivee > NOW() ");
         while ($produit = $r->fetch(PDO::FETCH_ASSOC)) {
           // debug($produit);
           echo '<div class="col-lg-4 col-md-6 mb-4">';
