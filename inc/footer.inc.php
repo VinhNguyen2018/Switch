@@ -1,7 +1,7 @@
 </main>
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Switch - François NGUYEN 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Switch - François NGUYEN 2020 - <a href="#">Mentions légales</a> - <a href="#">Conditions générales de ventes</a> </p>
     </div>
   </footer>
   <!--  CDN JS BOOTSTRAP -->
