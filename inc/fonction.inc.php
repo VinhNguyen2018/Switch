@@ -101,3 +101,9 @@ function affichage_note_etoile($id_salle){
     }
   }
 }
+
+function alertReponse(){
+  echo '<div class="alert alert-success" role="alert">';
+    echo 'Votre message a bien été envoyé, notre équipe vous répondra dans les plus brefs délais';
+  echo '</div>';
+}

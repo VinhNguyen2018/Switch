@@ -30,7 +30,7 @@
           <a class="nav-link" href="#">Qui sommes-nous ?</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="<?= URL ?>contact.php">Contact</a>
         </li>
       </ul>
       <div class="nav-item dropdown text">
