@@ -102,6 +102,33 @@ function affichage_note_etoile($id_salle){
   }
 }
 
+function affichage_note_etoile2($id_salle){
+  $moyenne = calcul_note_avis($id_salle);
+  if ($moyenne == 0) {
+    for ($i=0; $i < 5 ; $i++) {
+      $content .= '<i class="far fa-star"></i>';
+    }
+  }
+  else{
+    for ($i=0;  $i < $moyenne; $i++) {
+      $resultat = $moyenne - $i;
+      if ($resultat > 1) {
+        $content .= '<i class="fas fa-star"></i>';
+      }
+      elseif ($resultat > 0) {
+        $content .= '<i class="fas fa-star-half-alt"></i>';
+      }
+    }
+    $restant = 5 - $moyenne;
+    if ( $restant > 1  ) {
+      for ($i=0; $i < $restant  ; $i++) {
+        $content .= '<i class="far fa-star"></i>';
+        $restant--;
+      }
+    }
+  }
+}
+
 function alertReponse(){
   echo '<div class="alert alert-success" role="alert">';
     echo 'Votre message a bien été envoyé, notre équipe vous répondra dans les plus brefs délais';

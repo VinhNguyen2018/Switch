@@ -5,7 +5,7 @@
 
 if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-  header('location:../connexion.php'); //redirection vers la page de conenxion
+  header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
 }
 
 $content .= '<h5>Top 5 des salles les mieux notées</h5>';

@@ -3,7 +3,7 @@
 <?php
 if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-  header('location:../connexion.php'); //redirection vers la page de conenxion
+  header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
   exit();
 }
 
@@ -105,7 +105,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
     adresse = '$_POST[adresse]',
     cp = '$_POST[cp]'
     WHERE id_salle = '$_GET[id_salle]'");
-  header('location:gestion_salle.php');
+  header('location:'.URL.'gestion_salle.php');
     exit();
   }
   else{
@@ -116,7 +116,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                   '$_POST[pays]','$_POST[ville]','$_POST[adresse]','$_POST[cp]',
                   '$_POST[capacite]','$_POST[categorie]'
             ) ");
-      header('location:gestion_salle.php');
+      header('location:'.URL.'gestion_salle.php');
       exit();
 
   }
@@ -152,7 +152,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
   }
 
   execute_requete('DELETE FROM salle WHERE id_salle ='. $_GET['id_salle'] . ' ');
-  header('location:gestion_salle.php');
+  header('location:'.URL.'gestion_salle.php');
     exit();
 }
 

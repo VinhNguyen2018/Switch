@@ -5,12 +5,14 @@
 if( isset($_GET['action']) && $_GET['action'] == 'deconnexion' ){
 //si il y a une 'action' dan l'URL ET que cette 'action' est égale à 'deconnexion', alors on détruit la session
   session_destroy();
+  header('location:'.URL.'connexion.php');
+  exit();
 }
 //-----------------------------------------------------------------
 
 if( userConnect() ){ //si l'internaute est connecté, on le redirige vers profil.php
 
-  header('location:profil.php');
+  header('location:'.URL.'profil.php');
   exit();
 }
 
@@ -43,7 +45,7 @@ if( $_POST ){ //si on a valider le formulaire
 
       //debug( $_SESSION );
       //redirection vers la page profil :
-      header('location:profil.php');
+      header('location:'.URL.'profil.php');
     }
     else{
 
@@ -58,18 +60,24 @@ if( $_POST ){ //si on a valider le formulaire
 
 //-----------------------------------------------------------------------------------
 ?>
-<h1>CONNEXION</h1>
+<div class="container">
+  <div class="stat-box">
+    <h1>CONNEXION</h1>
 
-<?= $error; // affichage des erreurs ?>
+    <?= $error; // affichage des erreurs ?>
 
-<form method="post">
-  <label>Pseudo</label><br>
-  <input type="text" class="form-control" name="pseudo"><br>
+    <form method="post">
+      <label>Pseudo</label><br>
+      <input type="text" class="form-control" name="pseudo"><br>
 
-  <label>Mot de passe</label><br>
-  <input type="text" class="form-control" name="mdp"><br>
+      <label>Mot de passe</label><br>
+      <input type="text" class="form-control" name="mdp"><br>
 
-  <input type="submit" value="Connexion" class="btn btn-secondary">
-</form>
+      <input type="submit" value="Connexion" class="btn btn-secondary">
+    </form>
+
+  </div>
+
+</div>
 
 <?php require_once "inc/footer.inc.php"; ?>

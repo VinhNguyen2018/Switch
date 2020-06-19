@@ -5,7 +5,7 @@
 
 if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-  header('location:../connexion.php'); //redirection vers la page de conenxion
+  header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
 }
 
 //-----------------------------------------------------------

@@ -8,7 +8,7 @@ if( isset($_GET['id_produit']) ){ //Si il existe 'id_produit' dans mon URL c'est
 }
 else{ //Sinon, redirection vers l'accueil
 
-  header('location:index.php');
+  header('location:'.URL.'index.php');
   exit(); //quitte le script courant
 }
 
@@ -29,7 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'booking') {
         NOW() )  ");
     // debug($_SESSION['membre']['id_membre']);
     execute_requete("UPDATE produit SET etat = 'reservation' WHERE id_produit = '$_GET[id_produit]' ");
-    header('location:profil.php');
+    header('location:'.URL.'profil.php');
     exit(); //quitte le script courant
   }
 }

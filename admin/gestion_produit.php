@@ -3,7 +3,7 @@
 <?php
   if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-    header('location:../connexion.php'); //redirection vers la page de conenxion
+    header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
     exit();
   }
 
@@ -78,7 +78,7 @@ $content .= '</div>';
     prix = '$_POST[prix]'
     WHERE id_produit = '$_GET[id_produit]'");
 
-    header('location:gestion_produit.php');
+    header('location:'.URL.'gestion_produit.php');
       exit();
   }
   else{
@@ -88,7 +88,7 @@ $content .= '</div>';
         '$_POST[date_depart]',
         '$_POST[prix]'
       ) ");
-    header('location:gestion_produit.php');
+    header('location:'.URL.'gestion_produit.php');
       exit();
     }
   }
@@ -123,7 +123,7 @@ if( isset( $_GET['id_produit'] ) ){
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
   // debug($_GET);
   execute_requete('DELETE FROM produit WHERE id_produit ='. $_GET['id_produit'] . ' ');
-  header('location:gestion_produit.php');
+  header('location:'.URL.'gestion_produit.php');
     exit();
 
 }

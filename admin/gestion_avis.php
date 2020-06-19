@@ -3,7 +3,7 @@
 <?php
 if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-  header('location:../connexion.php'); //redirection vers la page de conenxion
+  header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
   exit();
 }
 
@@ -11,7 +11,7 @@ if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la 
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
   execute_requete("DELETE FROM avis WHERE id_avis = '$_GET[id_avis]'");
-  header('location:gestion_avis.php');
+  header('location:'.URL.'gestion_avis.php');
     exit();
 
 }

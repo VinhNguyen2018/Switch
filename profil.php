@@ -4,7 +4,7 @@
 if( !userConnect() ){ //SI l'internaute N'EST PAS conencté
 
   //redirection vers la page de connexion
-  header('location:connexion.php');
+  header('location:'.URL.'connexion.php');
 
   exit(); //exit() : termine le script courant
 }
@@ -21,7 +21,7 @@ if( adminConnect() ){ //si on est connecté et que l'on est admin, on affiche un
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
   execute_requete("DELETE FROM commande WHERE id_commande = '$_GET[id_commande]'");
-  header('location:profil.php');
+  header('location:'.URL.'profil.php');
   exit();
 }
 
