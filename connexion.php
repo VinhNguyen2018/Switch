@@ -5,14 +5,21 @@
 if( isset($_GET['action']) && $_GET['action'] == 'deconnexion' ){
 //si il y a une 'action' dan l'URL ET que cette 'action' est égale à 'deconnexion', alors on détruit la session
   session_destroy();
-  header('location:'.URL.'connexion.php');
+  header("Cache-Control: no-cache");
+  header("Expires: -1");
+
+  header('location:https://switch.francois-nguyen.fr/connexion.php');
   exit();
 }
 //-----------------------------------------------------------------
 
 if( userConnect() ){ //si l'internaute est connecté, on le redirige vers profil.php
 
-  header('location:'.URL.'profil.php');
+  //prevent page caching
+  header("Cache-Control: no-cache");
+  header("Expires: -1");
+
+  header('location:https://switch.francois-nguyen.fr/profil.php');
   exit();
 }
 
@@ -45,7 +52,11 @@ if( $_POST ){ //si on a valider le formulaire
 
       //debug( $_SESSION );
       //redirection vers la page profil :
-      header('location:'.URL.'profil.php');
+      header("Cache-Control: no-cache");
+      header("Expires: -1");
+
+      header('location:https://switch.francois-nguyen.fr/profil.php');
+      exit();
     }
     else{
 

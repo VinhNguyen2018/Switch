@@ -6,17 +6,17 @@ session_start();
 //Connexion à la BDD :
 
 // -- 1on1 bdd id --
-// $servername = 'db5000561366.hosting-data.io';
-// $bddname = 'dbs538933';
-// $username = 'dbu167259';
-// $password = 'Brioche01*';
+$servername = 'db5000561366.hosting-data.io';
+$bddname = 'dbs538933';
+$username = 'dbu167259';
+$password = 'Brioche01*';
 
 
 // localhost id
-$servername = 'localhost';
-$bddname = 'switch';
-$username = 'root';
-$password = 'root';
+// $servername = 'localhost';
+// $bddname = 'switch';
+// $username = 'root';
+// $password = 'root';
 
 $pdo = new PDO("mysql:host=$servername;dbname=$bddname", $username, $password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES UTF8") );
 //var_dump($pdo);
@@ -25,11 +25,11 @@ $pdo = new PDO("mysql:host=$servername;dbname=$bddname", $username, $password, a
 //Definition d'une constante :
 
 // URL online
-// define('URL', 'https://switch.francois-nguyen.fr/');
+define('URL', 'https://switch.francois-nguyen.fr/');
 
 // URL localhost
 
-define('URL', 'http://localhost:8888/cours_ifocop_php/Switch/');
+// define('URL', 'http://localhost:8888/cours_ifocop_php/Switch/');
 
 //------------------------------------------------
 //déclaration de variables :

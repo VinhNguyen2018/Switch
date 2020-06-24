@@ -8,7 +8,7 @@ if( isset($_GET['id_salle']) ){ //Si il existe 'id_produit' dans mon URL c'est q
 }
 else{ //Sinon, redirection vers l'accueil
 
-  header('location:'.URL.'index.php');
+  header('location: '.URL.'index.php');
   exit(); //quitte le script courant
 }
 
@@ -30,7 +30,7 @@ if (!empty( $_POST )) {
                   '$id_membre','$_GET[id_salle]',
                   '$_POST[commentaire]','$_POST[note]',NOW()
             ) ");
-      header('location:'.URL.'avis.php?id_salle=' . $_GET['id_salle']);
+      header('location: '.URL.'avis.php?id_salle=' . $_GET['id_salle']);
       exit();
 }
 ?>

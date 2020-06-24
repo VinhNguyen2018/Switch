@@ -3,7 +3,7 @@
 
 if( userConnect() ){ //Si l'internaute est connecté, on le redirige vers le profil.php
 
-  header('location:'.URL.'profil.php');
+  header('location: '.URL.'profil.php');
   exit();
 }
 

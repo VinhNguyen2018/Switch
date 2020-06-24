@@ -2,7 +2,7 @@
 <?php
 if( !adminConnect() ){ //Si l'admin N'EST PAS connecté, on le redirige vers la page connexion
 
-  header('location:'.URL.'connexion.php'); //redirection vers la page de conenxion
+  header('location: '.URL.'connexion.php'); //redirection vers la page de conenxion
   exit();
 }
 
@@ -58,7 +58,7 @@ $content .= '</div>';
 if (isset($_GET['action']) && $_GET['action'] == 'delete'){
   debug($_GET);
 execute_requete('DELETE FROM membre WHERE id_membre ='. $_GET['id_membre'] . ' ');
-  header('location:'.URL.'gestion_membre.php');
+  header('location: '.URL.'gestion_membre.php');
     exit();
 }
 //Modification membres --------------------------------------------
@@ -78,7 +78,7 @@ if (!empty( $_POST )) {
     statut = '$_POST[statut]'
     WHERE id_membre = '$_GET[id_membre]'");
 
-    header('location:'.URL.'gestion_membre.php');
+    header('location: '.URL.'gestion_membre.php');
       exit();
     }
   }
